@@ -16,18 +16,21 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private CursorPosition _cursor;
 
+    private PlayFX _playFX;
     private Animator _animator;
     private Rigidbody _rigidbody;
     private bool _isGrounded;
+    private float _timer;
     
 
     void Start()
     {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        _playFX = GetComponent<PlayFX>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleMovementInput();
         HandleJumpInput();
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.velocity = new Vector3(movement.x * _moveSpeed, _rigidbody.velocity.y, movement.z * _moveSpeed);
         if (horizontal != 0f || vertical != 0f)
         {
+            WaitForStep();
             _animator.SetBool("IsMoving", true);
         }
         else
@@ -51,6 +55,17 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("IsMoving", false);
         }
 
+    }
+
+    private void WaitForStep()
+    {
+        if(_timer >= 0.3f)
+        {            
+            _timer = 0;
+            _playFX.PlayStepEffect(transform.position);
+
+        }
+        _timer += Time.fixedDeltaTime;
     }
 
     void HandleJumpInput()
@@ -92,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0f, angle, 0f);
 
 
-            float step = _rotationSpeed * Time.deltaTime;
+            float step = _rotationSpeed * Time.fixedDeltaTime;
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, step);
         }
     }
