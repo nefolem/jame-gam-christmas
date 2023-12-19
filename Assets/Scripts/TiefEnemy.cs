@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class TiefEnemy : Enemy
 {
@@ -22,23 +23,13 @@ public class TiefEnemy : Enemy
 
     void Update()
     {
-        //if (_timer >= _nextMoveTime)
-        //{
-            TryStealGift();
-        //    _timer = 0f;            
-               
-
-        //}
-        //else
-        //{
-        //    _timer += Time.deltaTime;
-            
-        //}
+        
+        
 
         if(!_isGiftStolen)
         {
-
-            MoveToTarget(_targetObject.transform);
+            TryStealGift();
+            MoveToTarget(_targetObject?.transform);
         }
         else
         {
@@ -52,17 +43,12 @@ public class TiefEnemy : Enemy
     {
         if (_targetObject == null || Vector3.Distance(transform.position, _targetObject.transform.position) > _stealRadius)
         {
-            FindAndSetTargetGift();
-            
+            FindAndSetTargetGift();            
         }
         else if (Vector3.Distance(transform.position, _targetObject.transform.position) <= _stealRadius)
         {
             StealGift();
-            //_targetObject = null;
             HideBehindObstacle();
-            Debug.Log(_hideSpot);           
-
-            
         }
     }
 
@@ -81,9 +67,8 @@ public class TiefEnemy : Enemy
     }
 
     void StealGift()
-    {
-        
-        Destroy(_targetObject);
+    {        
+        _targetObject.SetActive(false);
         _isGiftStolen = true;
         _targetObject = null;
     }
@@ -105,25 +90,36 @@ public class TiefEnemy : Enemy
                     break;
                 }
             }
-
-            //Vector3 playerDirection = _player.transform.position - transform.position;
-
             
-            //Vector3 targetPoint = _player.transform.position - playerDirection.normalized * _hideRadius;
-
-            //Debug.Log("player found");
-            //RaycastHit hit;
-            //if (Physics.Raycast(transform.position, playerDirection.normalized, out hit, _hideRadius, _obstacleLayer))
-            //{
-            //    Debug.Log("raycast found smth");
-            //    if (hit.collider.CompareTag(_obstacleTag))
-            //    {
-            //        _hideSpot.position = hit.point;
-            //    }
-            //}
-
-            
-            //_nextMoveTime = Time.time + _moveCooldown;
         }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag(_obstacleTag))
+        {
+            Hide(true);
+        }
+        else if (collision.collider.CompareTag("Snowball"))
+        {
+            TakeDamage(1);
+            _targetObject?.SetActive(true);
+            _targetObject.transform.position = transform.position;
+        }
+        else { return; }
+    }
+
+
+    public void Hide(bool isHiding)
+    {
+        foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>())
+        {
+            mr.enabled = !isHiding;
+        }
+
+        var ps = gameObject.GetComponentInChildren<ParticleSystem>();
+        ps.enableEmission = !isHiding;
+      
     }
 }
