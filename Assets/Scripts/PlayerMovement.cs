@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _groundCheckDistance = 0.1f;
 
-    [SerializeField] private CursorPosition _cursor;
+    //[SerializeField] private CursorPosition _cursor;
 
     private PlayFX _playFX;
     private Animator _animator;
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
     void RotateTowardsCursor()
     {
-        Vector3 targetDirection = _cursor.GetMouseTargetDirection(transform);
+        Vector3 targetDirection = CursorPosition.GetMouseTargetDirection(transform);
         
         RotatePlayer(targetDirection);
     }
@@ -101,11 +101,8 @@ public class PlayerMovement : MonoBehaviour
         if (targetDirection != Vector3.zero)
         {
             
-            float angle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
-
-            
+            float angle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;            
             Quaternion targetRotation = Quaternion.Euler(0f, angle, 0f);
-
 
             float step = _rotationSpeed * Time.fixedDeltaTime;
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, step);

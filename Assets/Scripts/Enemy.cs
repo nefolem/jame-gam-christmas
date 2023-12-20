@@ -6,16 +6,16 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 2;
     [SerializeField] protected float _movementSpeed = 10f;
-    protected Rigidbody _rigidbody;
     private int _currentHealth;
     private PlayFX _playFX;
     protected GameObject _player;
+    [SerializeField] protected float _hideRadius = 5f;
+    protected Transform _hideSpot;
     //protected GameObject _targetObject;
 
     private void Start()
     {
         _currentHealth = _maxHealth;
-        _rigidbody = GetComponent<Rigidbody>();
         _playFX = GetComponent<PlayFX>();
         _player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -42,10 +42,28 @@ public class Enemy : MonoBehaviour
            
             transform.LookAt(target);
             transform.Translate(Vector3.forward * _movementSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, target.position) < 0.5f)
+            
+        }
+    }
+
+    protected void HideBehindObstacle()
+    {
+        if (_player != null)
+        {
+
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _hideRadius);
+            foreach (Collider collider in colliders)
             {
-                target.position = Vector3.zero;
+
+
+                if (collider.GetComponent<Tree>())
+                {
+
+                    _hideSpot = collider.gameObject.transform;
+                    break;
+                }
             }
+
         }
     }
 

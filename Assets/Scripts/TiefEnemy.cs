@@ -5,27 +5,26 @@ using UnityEngine.Android;
 
 public class TiefEnemy : Enemy
 {
-    [SerializeField] private string _obstacleTag = "Obstacle";
+
     [SerializeField] private string _giftTag = "Gift";
-    [SerializeField] private LayerMask _obstacleLayer;
 
     [Header("Steal and move")]
     [SerializeField] private float _stealRadius = 3f;
     [SerializeField] private float _findToStealRadius = 3f;
-    [SerializeField] private float _hideRadius = 5f;
+
     [SerializeField] private float _moveCooldown = 5f;
     [SerializeField] private float _nextMoveTime = 5f;
+    [SerializeField] private GameObject _stolenGiftPoint;
 
-    private Transform _hideSpot;
+    
     private GameObject _targetObject;
     private float _timer;
     private bool _isGiftStolen = false;
+    private bool _isHiding = false;
+    private GameObject _alreadyHided;
 
     void Update()
-    {
-        
-        
-
+    {              
         if(!_isGiftStolen)
         {
             TryStealGift();
@@ -33,10 +32,9 @@ public class TiefEnemy : Enemy
         }
         else
         {
+            _targetObject.transform.position = _stolenGiftPoint.transform.position;
             MoveToTarget(_hideSpot);
-        }
-
-
+        }     
     }
 
     void TryStealGift()
@@ -68,58 +66,41 @@ public class TiefEnemy : Enemy
 
     void StealGift()
     {        
-        _targetObject.SetActive(false);
+        //_targetObject?.SetActive(false);
         _isGiftStolen = true;
-        _targetObject = null;
-    }
-
-    void HideBehindObstacle()
-    {
-        if (_player != null)
-        {
-
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _hideRadius);
-            foreach (Collider collider in colliders)
-            {
-                
-
-                if (collider.CompareTag(_obstacleTag))
-                {
-                    
-                    _hideSpot = collider.gameObject.transform;
-                    break;
-                }
-            }
-            
-        }
-    }
+        //_targetObject = null;
+    }    
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag(_obstacleTag))
+        if (collision.collider.GetComponent<Tree>())
         {
-            Hide(true);
+            _isHiding = true;
+            _alreadyHided = collision.gameObject;
         }
-        else if (collision.collider.CompareTag("Snowball"))
+        else if (collision.collider.GetComponent<Snowball>())
         {
+            Debug.Log("snowball");
             TakeDamage(1);
-            _targetObject?.SetActive(true);
-            _targetObject.transform.position = transform.position;
+            _isGiftStolen = false;
+            _targetObject.GetComponent<Rigidbody>().useGravity = true;
+            
         }
-        else { return; }
+        
     }
 
 
-    public void Hide(bool isHiding)
-    {
-        foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>())
-        {
-            mr.enabled = !isHiding;
-        }
-
-        var ps = gameObject.GetComponentInChildren<ParticleSystem>();
-        ps.enableEmission = !isHiding;
+    //public void Hide(bool isHiding)
+    //{
+    //    foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>())
+    //    {
+    //        mr.enabled = !isHiding;
+    //    }
+    //    //_hideSpot.position = null;
+    //    var ps = gameObject.GetComponentInChildren<ParticleSystem>();
+    //    ps.enableEmission = !isHiding;
+    //    _targetObject.SetActive(!isHiding);
       
-    }
+    //}
 }

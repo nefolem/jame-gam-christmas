@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 7501120579775267608}
   - component: {fileID: 8862394435807012392}
   - component: {fileID: 6062198154394720815}
+  - component: {fileID: 6519121489937470684}
   m_Layer: 0
   m_Name: Gnome
   m_TagString: Player
@@ -196,6 +197,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 780525346127089716}
+  - {fileID: 3443767499823327514}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -254,7 +256,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7596248376045026094}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e8185ffaeb80ff1419256be5a0c95753, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -289,7 +291,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _groundCheckDistance: 1
-  _cursor: {fileID: 0}
 --- !u!114 &8862394435807012392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,11 +305,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageEffectPrefab: {fileID: 0}
   _deathEffectPrefab: {fileID: 0}
-  _sprite: {fileID: 6257346891023382357, guid: b81ff55145716f34790ff9ebce7580d1, type: 3}
+  _stepEffectPrefab: {fileID: 0}
   _audioSource: {fileID: 6062198154394720815}
   _damageSound: {fileID: 8300000, guid: f4f91dbaa277bc748bb93d1170faa40b, type: 3}
   _deathSound: {fileID: 8300000, guid: a1376a191b6a4794c9803d12c454d4da, type: 3}
-  _stepSound: {fileID: 8300000, guid: 214703d4bec78a34f980ea6353c598f0, type: 3}
+  _stepSound: {fileID: 8300000, guid: 4acc9d4b8ecfa8d4e9fdb67c95d93ca7, type: 3}
 --- !u!82 &6062198154394720815
 AudioSource:
   m_ObjectHideFlags: 0
@@ -321,7 +322,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.402
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -405,6 +406,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6519121489937470684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596248376045026094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c64ae57a3697894c8f613815e3fb169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snowballPrefab: {fileID: 4063179829065991601, guid: f57fc3ecb9ffee3489d6f84db599c3e1, type: 3}
+  snowballPoint: {fileID: 0}
 --- !u!1 &7624971192539429796
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +516,37 @@ Transform:
   - {fileID: 1782513591384193064}
   - {fileID: 8197842891843340232}
   - {fileID: 1539333152882656240}
+  m_Father: {fileID: 6256242629450591413}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8571541846361073466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3443767499823327514}
+  m_Layer: 0
+  m_Name: SnawballPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3443767499823327514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571541846361073466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.436, y: 7.67, z: 4.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 6256242629450591413}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

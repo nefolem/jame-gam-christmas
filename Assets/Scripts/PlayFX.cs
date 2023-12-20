@@ -7,7 +7,7 @@ public class PlayFX : MonoBehaviour
     [Header("Visual Effects")]
     [SerializeField] private GameObject _damageEffectPrefab;
     [SerializeField] private GameObject _deathEffectPrefab;
-    [SerializeField] private GameObject _sprite;
+    [SerializeField] private GameObject _stepEffectPrefab;
 
     [Header("Audio Effects")]
     [SerializeField] private AudioSource _audioSource;
@@ -34,7 +34,7 @@ public class PlayFX : MonoBehaviour
 
     public void PlayStepEffect(Vector3 position)
     {
-        InstantiateEffect(_sprite, position);
+        InstantiateEffect(_stepEffectPrefab, position);
         PlaySound(_stepSound);
     }
 
