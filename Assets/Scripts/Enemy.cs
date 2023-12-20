@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     protected GameObject _player;
     [SerializeField] protected float _hideRadius = 5f;
     protected Transform _hideSpot;
+    protected GameObject _lastHided;
+    public bool _isPatroling = true;
     //protected GameObject _targetObject;
 
     private void Start()
@@ -27,7 +29,7 @@ public class Enemy : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _playFX.PlayDeathEffect(transform.position);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.3f);
         }
         else
         {
@@ -39,12 +41,14 @@ public class Enemy : MonoBehaviour
     {
         if (target != null)
         {
-           
+            _isPatroling = false;
             transform.LookAt(target);
-            transform.Translate(Vector3.forward * _movementSpeed * Time.deltaTime);
-            
+            Target = target;
+            //transform.Translate(Vector3.forward * _movementSpeed * Time.deltaTime);            
         }
     }
+
+    public Transform Target { get; private set; }
 
     protected void HideBehindObstacle()
     {
@@ -56,7 +60,7 @@ public class Enemy : MonoBehaviour
             {
 
 
-                if (collider.GetComponent<Tree>())
+                if (collider.GetComponent<Tree>() && collider.gameObject != _lastHided)
                 {
 
                     _hideSpot = collider.gameObject.transform;

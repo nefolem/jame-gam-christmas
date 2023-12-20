@@ -14,9 +14,14 @@ public class Tree : MonoBehaviour
             collision.gameObject.SetActive(false);
 
         }
-        //else if (collision.gameObject.GetComponent<Snowball>())
+        else if (collision.gameObject.GetComponent<Snowball>())
         {
-
+            Debug.Log("snowball");
+            foreach(GameObject go in enemyList)
+            {
+                go.SetActive(true);
+                go.transform.position = transform.position + new Vector3(15f, 10f, 15f);
+            }
         }
     }
 }

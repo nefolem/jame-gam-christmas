@@ -20,8 +20,8 @@ public class TiefEnemy : Enemy
     private GameObject _targetObject;
     private float _timer;
     private bool _isGiftStolen = false;
-    private bool _isHiding = false;
-    private GameObject _alreadyHided;
+    private bool _isHiding = false;    
+    private GameObject _lastStolen;
 
     void Update()
     {              
@@ -31,15 +31,19 @@ public class TiefEnemy : Enemy
             MoveToTarget(_targetObject?.transform);
         }
         else
-        {
+        {            
             _targetObject.transform.position = _stolenGiftPoint.transform.position;
+            if(_hideSpot == null)
+            {
+                HideBehindObstacle();
+            }
             MoveToTarget(_hideSpot);
         }     
     }
 
     void TryStealGift()
     {
-        if (_targetObject == null || Vector3.Distance(transform.position, _targetObject.transform.position) > _stealRadius)
+        if (_targetObject == null || Vector3.Distance(transform.position, _targetObject.transform.position) > _findToStealRadius)
         {
             FindAndSetTargetGift();            
         }
@@ -54,10 +58,9 @@ public class TiefEnemy : Enemy
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findToStealRadius);
         foreach (Collider collider in colliders)
-        {
-            
-            if (collider.CompareTag(_giftTag))
-            {
+        {            
+            if (collider.CompareTag(_giftTag) && collider.gameObject != _lastStolen)
+            {                
                 _targetObject = collider.gameObject;
                 break;
             }
@@ -65,10 +68,9 @@ public class TiefEnemy : Enemy
     }
 
     void StealGift()
-    {        
-        //_targetObject?.SetActive(false);
+    {
+        _targetObject.GetComponent<Rigidbody>().useGravity = false;
         _isGiftStolen = true;
-        //_targetObject = null;
     }    
 
 
@@ -77,30 +79,19 @@ public class TiefEnemy : Enemy
         if (collision.collider.GetComponent<Tree>())
         {
             _isHiding = true;
-            _alreadyHided = collision.gameObject;
+            _lastHided = collision.gameObject;
+            _hideSpot = null;
         }
         else if (collision.collider.GetComponent<Snowball>())
         {
-            Debug.Log("snowball");
-            TakeDamage(1);
-            _isGiftStolen = false;
             _targetObject.GetComponent<Rigidbody>().useGravity = true;
+            _lastStolen = _targetObject;
+            _targetObject = null;
+            _isGiftStolen = false;
+            TakeDamage(1);
             
         }
         
     }
 
-
-    //public void Hide(bool isHiding)
-    //{
-    //    foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>())
-    //    {
-    //        mr.enabled = !isHiding;
-    //    }
-    //    //_hideSpot.position = null;
-    //    var ps = gameObject.GetComponentInChildren<ParticleSystem>();
-    //    ps.enableEmission = !isHiding;
-    //    _targetObject.SetActive(!isHiding);
-      
-    //}
 }

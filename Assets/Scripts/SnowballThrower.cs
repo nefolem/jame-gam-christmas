@@ -48,13 +48,12 @@ public class SnowballThrower : MonoBehaviour
 
             if (rb != null)
             {
-                
+
                 Vector3 throwDirection = CalculateThrowDirection(transform, hit.point, throwAngle);
-
+                //Vector3 throwDirection = (hit.point - transform.position).normalized;
                 
-                Vector3 throwVelocity = throwDirection * throwForce;
+                Vector3 throwVelocity = throwDirection * throwForce;              
 
-                
                 rb.velocity = throwVelocity;
             }
         }
@@ -71,7 +70,7 @@ public class SnowballThrower : MonoBehaviour
         direction.y = distance * Mathf.Tan(radianAngle);
 
         
-        direction.Normalize();
+        //direction.Normalize();
 
         return direction;
     }

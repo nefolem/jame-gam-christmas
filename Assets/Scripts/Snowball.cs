@@ -13,7 +13,6 @@ public class Snowball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("meow");
         Destroy(gameObject);
     }
 }
