@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     protected Transform _hideSpot;
     protected GameObject _lastHided;
     public bool _isPatroling = true;
+    //protected Vector3 _target;
 
 
     private void Start()
@@ -67,7 +68,7 @@ public class Enemy : MonoBehaviour
             foreach (Collider collider in colliders)
             {
 
-                if (collider.GetComponent<Tree>() && collider.gameObject != _lastHided)
+                if (collider.GetComponent<TreeShelter>() && collider.gameObject != _lastHided)
                 {
                 Debug.Log(collider.gameObject);
 
@@ -81,7 +82,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.GetComponent<Tree>())
+        if (collision.collider.GetComponent<TreeShelter>())
         {
             _lastHided = collision.gameObject;
             _hideSpot = null;
