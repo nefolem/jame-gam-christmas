@@ -19,8 +19,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _currentHealth = _maxHealth;
-        _playFX = GetComponent<PlayFX>();
-        Debug.Log(_playFX.gameObject.name);
+        _playFX = GetComponent<PlayFX>();        
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
