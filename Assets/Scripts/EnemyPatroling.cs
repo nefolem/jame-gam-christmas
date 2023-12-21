@@ -1,14 +1,13 @@
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyPatroling : MonoBehaviour
 {
     [SerializeField] private Transform[] patrolPoints;
-    [SerializeField] private float patrolSpeed = 2f;
-    [SerializeField] private float _flyingHeight = 10f;
 
     private Enemy enemy;
     private int currentPatrolIndex;
@@ -34,7 +33,12 @@ public class EnemyPatroling : MonoBehaviour
             }
         }
         else
-        {                      
+        {            
+            if(enemy.Target.GetComponent<Tree>())
+            {
+
+            enemy.Target.gameObject.GetComponent<NavMeshObstacle>().carving = false;
+            }
             SetDestination(enemy.Target.position);
         }
     }

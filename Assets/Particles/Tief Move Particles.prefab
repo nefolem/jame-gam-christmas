@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8896764388944155745}
   - component: {fileID: 8867139619267504629}
   m_Layer: 0
-  m_Name: Enemy Move Particles
+  m_Name: Tief Move Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

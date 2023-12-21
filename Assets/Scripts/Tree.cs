@@ -16,7 +16,7 @@ public class Tree : MonoBehaviour
         }
         else if (collision.gameObject.GetComponent<Snowball>())
         {
-            Debug.Log("snowball");
+      
             foreach(GameObject go in enemyList)
             {
                 go.SetActive(true);

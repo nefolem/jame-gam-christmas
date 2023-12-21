@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
             {
                 mr.enabled = false;
             }
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject, 1f);
         }
         else
         {
@@ -67,9 +67,9 @@ public class Enemy : MonoBehaviour
             foreach (Collider collider in colliders)
             {
 
-
                 if (collider.GetComponent<Tree>() && collider.gameObject != _lastHided)
                 {
+                Debug.Log(collider.gameObject);
 
                     _hideSpot = collider.gameObject.transform;
                     break;
