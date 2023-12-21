@@ -7,6 +7,7 @@ public class AnvilEnemy : Enemy
     [SerializeField] private float _findRadius;
     [SerializeField] private GameObject _anvilObject;
     private Transform _target;
+    private bool _isAnvilThrowed = false;
 
     private void Start()
     {
@@ -15,15 +16,20 @@ public class AnvilEnemy : Enemy
 
     private void Update()
     {
-        if(_target == null)
+        if (!_isAnvilThrowed)
         {
-            TryFindPlayer();
+
+            if (_target == null)
+            {
+                TryFindPlayer();
+            }
+            else if (_target != null && transform.position.x != _target.transform.position.x)
+            {
+                MoveToTarget(_target);
+            }
+            else ThrowAnvil();
         }
-        else if(_target!=null && transform.position.x != _target.transform.position.x)
-        {
-            MoveToTarget(_target);            
-        }
-        else ThrowAnvil();
+        else _isPatroling = true;
     }
  
     private void TryFindPlayer()
@@ -46,6 +52,10 @@ public class AnvilEnemy : Enemy
     {
         _anvilObject.GetComponent<Rigidbody>().useGravity = true;
         _anvilObject.transform.SetParent(null);
+        _isAnvilThrowed = true;
+
+        _playFX.PlayMeanness();
+        
         HideBehindObstacle();
     }
 }

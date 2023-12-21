@@ -14,6 +14,7 @@ public class PlayFX : MonoBehaviour
     [SerializeField] private AudioClip _damageSound;
     [SerializeField] private AudioClip _deathSound;
     [SerializeField] private AudioClip _stepSound;
+    [SerializeField] private AudioClip _meanSound;
 
     private void Awake()
     {
@@ -36,6 +37,11 @@ public class PlayFX : MonoBehaviour
     {
         InstantiateEffect(_stepEffectPrefab, position);
         PlaySound(_stepSound);
+    }
+
+    public void PlayMeanness()
+    {
+        PlaySound(_meanSound);
     }
 
     private void InstantiateEffect(GameObject prefab, Vector3 position)

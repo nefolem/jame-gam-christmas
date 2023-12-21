@@ -27,7 +27,6 @@ public class UI : MonoBehaviour
 
     private void OnMouseExit()
     {
-        Debug.Log("here");
         _animator.enabled = false;
         _source.Stop();
         _glowingStartButton.SetActive(false);

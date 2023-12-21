@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3726799214008960155}
   - component: {fileID: 520192526718005420}
   - component: {fileID: 2625431055748715986}
+  - component: {fileID: 128875711295280747}
   m_Layer: 0
   m_Name: gifts-6-Big_Gift_1
   m_TagString: Gift
@@ -82,6 +83,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 1.6, z: 0}
+--- !u!114 &128875711295280747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22154065313957959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1e81a0b710d004f9e9f5a74efb0072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawner: {fileID: 2033384405085138852, guid: 5cf02d72453fe354386461f2c294cf6b, type: 3}
 --- !u!1 &6043285684171281972
 GameObject:
   m_ObjectHideFlags: 0

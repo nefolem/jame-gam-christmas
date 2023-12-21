@@ -18,6 +18,7 @@ public class TiefEnemy : Enemy
     private bool _isGiftStolen = false;
     private GameObject _lastStolen;
     private bool _isTargetBox;
+    
 
     void Update()
     {              
@@ -62,7 +63,7 @@ public class TiefEnemy : Enemy
                 _isTargetBox = false;
                 break;
             }
-            else if(collider.GetComponent<Gifts>() && !_isTargetBox)
+            else if(collider.GetComponent<GiftsSpawner>() && !_isTargetBox)
             {
                 _isTargetBox = true;
                 _targetObject = collider.gameObject;
@@ -70,9 +71,10 @@ public class TiefEnemy : Enemy
         }
     }
 
-    void StealGift()
+    private void StealGift()
     {
         _targetObject.GetComponent<Rigidbody>().useGravity = false;
+        _playFX.PlayMeanness();
         _isGiftStolen = true;
     }    
 

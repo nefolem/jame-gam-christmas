@@ -16,12 +16,16 @@ public class CameraTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = CursorPosition.GetMousePosition();
-        Vector3 targetPos = (_player.transform.position + mousePos) / 2f;
+        if (_player != null)
+        {
+            Vector3 mousePos = CursorPosition.GetMousePosition();
+            Vector3 targetPos = (_player.transform.position + mousePos) / 2f;
 
-        targetPos.x = Mathf.Clamp(targetPos.x, -_threshold + _player.position.x, _threshold + _player.position.x);
-        targetPos.z = Mathf.Clamp(targetPos.z, -_threshold + _player.position.z, _threshold + _player.position.z);
+            targetPos.x = Mathf.Clamp(targetPos.x, -_threshold + _player.position.x, _threshold + _player.position.x);
+            targetPos.z = Mathf.Clamp(targetPos.z, -_threshold + _player.position.z, _threshold + _player.position.z);
 
-        transform.position = targetPos;
+            transform.position = targetPos;
+        }
+        
     }
 }

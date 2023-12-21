@@ -14,17 +14,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _groundCheckDistance = 0.1f;
 
-    //[SerializeField] private CursorPosition _cursor;
+    [Header("Health wtf")]
+    [SerializeField] private int _maxHealth;
 
     private PlayFX _playFX;
     private Animator _animator;
     private Rigidbody _rigidbody;
     private bool _isGrounded;
     private float _timer;
+    private int _currentHealth;
     
 
     void Start()
     {
+        _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _playFX = GetComponent<PlayFX>();
@@ -106,6 +109,16 @@ public class PlayerMovement : MonoBehaviour
 
             float step = _rotationSpeed * Time.fixedDeltaTime;
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, step);
+        }
+    }
+
+    public void GetDamage()
+    {
+        _currentHealth--;
+        if(_currentHealth <= 0) 
+        {
+            _playFX.PlayDeathEffect(transform.position);
+            Destroy(gameObject, 0.3f);
         }
     }
 }

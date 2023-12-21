@@ -22,18 +22,16 @@ public class TreeShelter : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        GetComponent<NavMeshObstacle>().enabled = true;
+        GetComponent<NavMeshObstacle>().carving = true;
         if (collision.gameObject.GetComponent<Enemy>() || collision.gameObject.CompareTag("Gift"))
         {
             enemyList.Add(collision.gameObject);
             collision.gameObject.SetActive(false);
-            Debug.Log(collision.gameObject.name);
         }
         else if (collision.gameObject.GetComponent<Snowball>())
         {
             foreach (GameObject go in enemyList)
             {
-                Debug.Log(go.name);
                 go.SetActive(true);
                 go.transform.position = transform.position + new Vector3(10f, 10f, 10f);
             }

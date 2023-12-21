@@ -4,32 +4,33 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Gifts : MonoBehaviour
+public class GiftsSpawner : MonoBehaviour
 {
     [SerializeField] TMP_Text _giftCountText;
     [SerializeField] private List<GameObject> gifts = new();
     [SerializeField] private int _maxGiftsCount = 100;
-    public int _currentGiftsCount;
+    public int CurrentGiftsCount { get; set; }
     // Start is called before the first frame update
     void Start()
     {
-        _currentGiftsCount = _maxGiftsCount;
+        CurrentGiftsCount = _maxGiftsCount;
 
-        _giftCountText.text = _currentGiftsCount.ToString();
+        _giftCountText.text = CurrentGiftsCount.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _giftCountText.text = _currentGiftsCount.ToString();
+        //Debug.Log(CurrentGiftsCount);
+        _giftCountText.text = CurrentGiftsCount.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Enemy>() && _currentGiftsCount != 0)
+        if(other.GetComponent<Enemy>() && CurrentGiftsCount != 0)
         {
             Instantiate(gifts[Random.Range(0, gifts.Count)], transform.position, Quaternion.identity);
-            _currentGiftsCount--;
+            CurrentGiftsCount--;
         }
     }
 }

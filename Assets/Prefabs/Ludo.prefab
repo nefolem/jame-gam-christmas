@@ -136,10 +136,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2440095803248850997}
   - component: {fileID: 3136295605583435547}
+  - component: {fileID: 5218880026585743936}
   - component: {fileID: 7482236137160196645}
   - component: {fileID: 8666840750643556883}
-  - component: {fileID: 8287719304653415992}
-  - component: {fileID: 5218880026585743936}
   - component: {fileID: 2066055934847590908}
   - component: {fileID: 6984370509817694845}
   m_Layer: 2
@@ -189,6 +188,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.83, y: 8.16, z: 4.44}
   m_Center: {x: 0, y: 2.33, z: 0}
+--- !u!114 &5218880026585743936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470357823029104312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5226eb82d77d0ad48be1b4d2e2b6802a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 2
+  _hideRadius: 5
+  _isPatroling: 1
+  _findRadius: 100
+  _anvilObject: {fileID: 2023339821838107544}
 --- !u!114 &7482236137160196645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,123 +239,11 @@ MonoBehaviour:
   _damageEffectPrefab: {fileID: 8142776624367745201, guid: be16a2ead503d12418c1f228fcee2f7c, type: 3}
   _deathEffectPrefab: {fileID: 2675321451291552638, guid: 8c922e29619693141bf7708f7a0e6a5b, type: 3}
   _stepEffectPrefab: {fileID: 0}
-  _audioSource: {fileID: 8287719304653415992}
+  _audioSource: {fileID: 0}
   _damageSound: {fileID: 8300000, guid: 26556751cd900a64290c977bffcced20, type: 3}
   _deathSound: {fileID: 8300000, guid: 93834f5b63bd9744e92bcc9908d9bb2b, type: 3}
   _stepSound: {fileID: 0}
---- !u!82 &8287719304653415992
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6470357823029104312}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 154923fa299b51c49888b96c5540b536, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.55
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 180
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.896
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &5218880026585743936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6470357823029104312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5226eb82d77d0ad48be1b4d2e2b6802a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 2
-  _hideRadius: 5
-  _isPatroling: 1
-  _findRadius: 100
-  _anvilObject: {fileID: 2023339821838107544}
+  _meanSound: {fileID: 8300000, guid: 154923fa299b51c49888b96c5540b536, type: 3}
 --- !u!54 &2066055934847590908
 Rigidbody:
   m_ObjectHideFlags: 0

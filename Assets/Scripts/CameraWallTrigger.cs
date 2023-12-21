@@ -10,7 +10,6 @@ public class CameraWallTrigger : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         wall = collision.gameObject;
-        Debug.Log("wall");
         collision.gameObject.GetComponent<MeshRenderer>().enabled = !collision.gameObject.GetComponent<MeshRenderer>().enabled;
     }
 

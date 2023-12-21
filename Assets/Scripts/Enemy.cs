@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _maxHealth = 2;
 
     private int _currentHealth;
-    private PlayFX _playFX;
+    protected PlayFX _playFX;
     protected GameObject _player;
     [SerializeField] protected float _hideRadius = 5f;
     protected Transform _hideSpot;
@@ -16,10 +16,11 @@ public class Enemy : MonoBehaviour
     //protected Vector3 _target;
 
 
-    private void Start()
+    private void Awake()
     {
         _currentHealth = _maxHealth;
         _playFX = GetComponent<PlayFX>();
+        Debug.Log(_playFX.gameObject.name);
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -63,15 +64,11 @@ public class Enemy : MonoBehaviour
     {
         if (_player != null)
         {
-
             Collider[] colliders = Physics.OverlapSphere(transform.position, _hideRadius);
             foreach (Collider collider in colliders)
             {
-
                 if (collider.GetComponent<TreeShelter>() && collider.gameObject != _lastHided)
                 {
-                Debug.Log(collider.gameObject);
-
                     _hideSpot = collider.gameObject.transform;
                     break;
                 }
@@ -79,6 +76,8 @@ public class Enemy : MonoBehaviour
 
         }
     }
+
+   
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
