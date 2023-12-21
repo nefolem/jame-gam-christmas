@@ -31,12 +31,10 @@ public class EnemyPatroling : MonoBehaviour
             {
                 destination = new Vector3(patrolPoints[Random.Range(0, patrolPoints.Length)].position.x, 0, patrolPoints[Random.Range(0, patrolPoints.Length)].position.z);
                 SetDestination(destination);
-                //Debug.Log(patrolPoints[currentPatrolIndex].position);
             }
         }
         else
-        {
-            Debug.Log(enemy.Target);            
+        {                      
             SetDestination(enemy.Target.position);
         }
     }

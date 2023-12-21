@@ -10,17 +10,12 @@ public class TiefEnemy : Enemy
 
     [Header("Steal and move")]
     [SerializeField] private float _stealRadius = 3f;
-    [SerializeField] private float _findToStealRadius = 3f;
+    [SerializeField] private float _findToStealRadius = 50f;
 
-    [SerializeField] private float _moveCooldown = 5f;
-    [SerializeField] private float _nextMoveTime = 5f;
     [SerializeField] private GameObject _stolenGiftPoint;
-
     
     private GameObject _targetObject;
-    private float _timer;
     private bool _isGiftStolen = false;
-    private bool _isHiding = false;    
     private GameObject _lastStolen;
 
     void Update()
@@ -74,21 +69,18 @@ public class TiefEnemy : Enemy
     }    
 
 
-    private void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.GetComponent<Tree>())
+        base.OnCollisionEnter(collision);
+        if (collision.collider.GetComponent<Snowball>())
         {
-            _isHiding = true;
-            _lastHided = collision.gameObject;
-            _hideSpot = null;
-        }
-        else if (collision.collider.GetComponent<Snowball>())
-        {
-            _targetObject.GetComponent<Rigidbody>().useGravity = true;
-            _lastStolen = _targetObject;
-            _targetObject = null;
-            _isGiftStolen = false;
-            TakeDamage(1);
+            if (_isGiftStolen)
+            {
+                _targetObject.GetComponent<Rigidbody>().useGravity = true;
+                _lastStolen = _targetObject;
+                _targetObject = null;
+                _isGiftStolen = false;
+            }
             
         }
         

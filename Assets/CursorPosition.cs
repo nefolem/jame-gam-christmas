@@ -20,4 +20,17 @@ public static class CursorPosition
 
         return Vector3.zero;
     }
+
+    public static Vector3 GetMousePosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.point;
+        }
+        else return Vector3.zero;
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 2;
-    [SerializeField] protected float _movementSpeed = 10f;
+
     private int _currentHealth;
     private PlayFX _playFX;
     protected GameObject _player;
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     protected Transform _hideSpot;
     protected GameObject _lastHided;
     public bool _isPatroling = true;
-    //protected GameObject _targetObject;
+
 
     private void Start()
     {
@@ -29,7 +29,11 @@ public class Enemy : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _playFX.PlayDeathEffect(transform.position);
-            Destroy(gameObject, 0.3f);
+            foreach(MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
+            {
+                mr.enabled = false;
+            }
+            Destroy(gameObject, 0.5f);
         }
         else
         {
@@ -45,6 +49,10 @@ public class Enemy : MonoBehaviour
             transform.LookAt(target);
             Target = target;
             //transform.Translate(Vector3.forward * _movementSpeed * Time.deltaTime);            
+        }
+        else
+        {
+            _isPatroling = true;
         }
     }
 
@@ -71,15 +79,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
-    protected void RotateEnemy(Vector3 targetDirection)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (targetDirection != Vector3.zero)
+        if (collision.collider.GetComponent<Tree>())
         {
-            Vector3 deltaPosition = targetDirection - transform.position;
-            float angle = Mathf.Atan2(deltaPosition.x, deltaPosition.z) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(0f, angle, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 7 * Time.deltaTime);
+            _lastHided = collision.gameObject;
+            _hideSpot = null;
         }
+        else if (collision.collider.GetComponent<Snowball>())
+        {            
+            TakeDamage(1);
+        }
+
     }
 }
