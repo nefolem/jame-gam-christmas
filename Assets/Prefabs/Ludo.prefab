@@ -386,7 +386,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 10
-  m_BaseOffset: 30
+  m_BaseOffset: 50
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &562345258874525847
@@ -772,6 +772,10 @@ PrefabInstance:
     - target: {fileID: 2365467911889461511, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
       propertyPath: m_Name
       value: Anvil
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923553482991559350, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
+      propertyPath: m_Mass
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5464711637113065922, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
       propertyPath: m_RootOrder

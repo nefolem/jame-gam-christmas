@@ -17,12 +17,13 @@ public class TiefEnemy : Enemy
     private GameObject _targetObject;
     private bool _isGiftStolen = false;
     private GameObject _lastStolen;
+    private bool _isTargetBox;
 
     void Update()
     {              
         if(!_isGiftStolen)
         {
-            TryStealGift();
+            TryStealGift();            
             MoveToTarget(_targetObject?.transform);
         }
         else
@@ -38,11 +39,11 @@ public class TiefEnemy : Enemy
 
     void TryStealGift()
     {
-        if (_targetObject == null || Vector3.Distance(transform.position, _targetObject.transform.position) > _findToStealRadius)
+        if (_targetObject == null || Vector3.Distance(transform.position, _targetObject.transform.position) > _findToStealRadius || _isTargetBox)
         {
             FindAndSetTargetGift();            
         }
-        else if (Vector3.Distance(transform.position, _targetObject.transform.position) <= _stealRadius)
+        else if (!_isTargetBox && Vector3.Distance(transform.position, _targetObject.transform.position) <= _stealRadius)
         {
             StealGift();
             HideBehindObstacle();
@@ -56,8 +57,15 @@ public class TiefEnemy : Enemy
         {            
             if (collider.CompareTag(_giftTag) && collider.gameObject != _lastStolen)
             {                
+                
                 _targetObject = collider.gameObject;
+                _isTargetBox = false;
                 break;
+            }
+            else if(collider.GetComponent<Gifts>() && !_isTargetBox)
+            {
+                _isTargetBox = true;
+                _targetObject = collider.gameObject;
             }
         }
     }

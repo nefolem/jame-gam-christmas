@@ -27,7 +27,7 @@ public class TreeShelter : MonoBehaviour
         {
             enemyList.Add(collision.gameObject);
             collision.gameObject.SetActive(false);
-            Debug.Log(enemyList.Count);
+            Debug.Log(collision.gameObject.name);
         }
         else if (collision.gameObject.GetComponent<Snowball>())
         {
