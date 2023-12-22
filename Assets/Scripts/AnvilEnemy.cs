@@ -108,6 +108,7 @@ public class AnvilEnemy : Enemy
         _anvilObject = _target.gameObject;
         _anvilObject.transform.SetParent(_anvilPoint);
         _anvilObject.transform.position = _anvilPoint.transform.position;
+        _anvilObject.GetComponent<Rigidbody>().useGravity = false;
         _target = null;
         _isAnvilInHands = true;
     }

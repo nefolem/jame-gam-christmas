@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6424d54c14705d14cb8a810dd2f1e801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snowballHit: {fileID: 8142776624367745201, guid: be16a2ead503d12418c1f228fcee2f7c, type: 3}
+  _snowballHit: {fileID: 8142776624367745201, guid: c7b5ca725dc977041bca2c731ecde563, type: 3}
 --- !u!1001 &5167916545596452106
 PrefabInstance:
   m_ObjectHideFlags: 0
