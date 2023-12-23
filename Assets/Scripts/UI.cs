@@ -18,16 +18,28 @@ public class UI : MonoBehaviour
     private void OnMouseEnter()
     {
         _source.PlayOneShot(_garlandHum);
+        
         StartCoroutine(EnableGarland());
         
 
     }
+
+    private void OnMouseDown()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameIntroManager.Instance.StartTimeline();
+        }
+    }
+
+
 
 
 
     private void OnMouseExit()
     {
         _animator.enabled = false;
+        StopCoroutine(EnableGarland());
         _source.Stop();
         _glowingStartButton.SetActive(false);
     }

@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Snowball : MonoBehaviour
 {
-    //[SerializeField] private float _speed = 30f;
-
-    //private void Update()
-    //{
-    //    transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-    //}
     [SerializeField] GameObject _snowballHit;
+    [SerializeField] AudioSource _as;
     private void OnCollisionEnter(Collision collision)
     {
         Instantiate(_snowballHit, transform.position, Quaternion.identity);
+        _as?.Play();
         Destroy(gameObject);
     }
 }

@@ -1,9 +1,15 @@
+using Cinemachine;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
 public class GameIntroManager : MonoBehaviour
 {
     [SerializeField] private float segmentEndTime = 14.82f;
+    [SerializeField] private CinemachineVirtualCamera _introVC;
+    [SerializeField] private List<Transform> _introVCPoints = new List<Transform>();
+    [SerializeField] private GameObject _player;
+    private int _currentIndex = 0;
     public PlayableDirector timelineDirector;
 
     public static GameIntroManager Instance;
@@ -30,6 +36,25 @@ public class GameIntroManager : MonoBehaviour
     {
         CancelInvoke("RepeatTimelineSegment");
         timelineDirector.time = segmentEndTime;
+        
+    }
+
+    public void SetIntroCameraPosition()
+    {
+        if (_currentIndex == 1)
+        {
+            _introVC.LookAt = _player.transform;
+        }
+        Debug.Log(_currentIndex);
+        _introVC.transform.position = _introVCPoints[_currentIndex].position;
+        _introVC.transform.rotation = _introVCPoints[_currentIndex].rotation;
+        _currentIndex++;
+
+    }
+
+    public void SetLookAtNull()
+    {
+        _introVC.LookAt = null;
     }
 
     void RepeatTimelineSegment()
