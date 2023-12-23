@@ -41,15 +41,23 @@ public class GameIntroManager : MonoBehaviour
 
     public void SetIntroCameraPosition()
     {
+        if (UI.instance._isStarted)
+        {
+            _currentIndex++;
+        }            
+        _introVC.transform.position = _introVCPoints[_currentIndex].position;
+        _introVC.transform.rotation = _introVCPoints[_currentIndex].rotation;
+
+
         if (_currentIndex == 1)
         {
             _introVC.LookAt = _player.transform;
         }
-        Debug.Log(_currentIndex);
-        _introVC.transform.position = _introVCPoints[_currentIndex].position;
-        _introVC.transform.rotation = _introVCPoints[_currentIndex].rotation;
-        _currentIndex++;
+    }
 
+    public void AddToGiftsCount()
+    {
+        GiftsSpawner.Instance.AddToGiftsCount();
     }
 
     public void SetLookAtNull()
