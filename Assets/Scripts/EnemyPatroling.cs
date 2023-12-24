@@ -34,17 +34,17 @@ public class EnemyPatroling : MonoBehaviour
         }
         else
         {
-            if(enemy.Target != null)
+            if (enemy.Target != null)
             {
 
-            if (enemy.Target.GetComponent<TreeShelter>())
-            {
+                if (enemy.Target.GetComponent<TreeShelter>())
+                {
 
-                enemy.Target.gameObject.GetComponent<NavMeshObstacle>().carving = false;
-                //enemy.Target.gameObject.GetComponent<Collider>().isTrigger = true;
+                    enemy.Target.gameObject.GetComponent<NavMeshObstacle>().carving = false;
+                    //enemy.Target.gameObject.GetComponent<Collider>().isTrigger = true;
 
-            }
-            SetDestination(enemy.Target.position);
+                }
+                SetDestination(enemy.Target.position);
             }
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class Enemy : MonoBehaviour
     protected Transform _hideSpot;
     protected GameObject _lastHided;
     public bool _isPatroling = true;
-    //protected Vector3 _target;
+    protected Transform _target;
 
+    public Transform Target { get; private set; }
 
     private void Awake()
     {
@@ -57,26 +59,56 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public Transform Target { get; private set; }
+    
 
     protected void HideBehindObstacle()
     {
-        if (_player != null)
-        {
+        
             Collider[] colliders = Physics.OverlapSphere(transform.position, _hideRadius);
-            foreach (Collider collider in colliders)
+        foreach (Collider collider in colliders)
+        {
+            if (collider.GetComponent<TreeShelter>() && collider.gameObject != _lastHided)
             {
-                if (collider.GetComponent<TreeShelter>() && collider.gameObject != _lastHided)
-                {
-                    _hideSpot = collider.gameObject.transform;
-                    break;
-                }
+                _hideSpot = collider.gameObject.transform;
+                MoveToTarget(_hideSpot);
+                //_isPatroling = false;
+                break;
             }
-
         }
+
+        
     }
 
-   
+    protected void TryFindPlayer(float searchRadius)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.GetComponent<PlayerMovement>())
+            {
+                Physics.IgnoreCollision(collider, GetComponent<NavMeshAgent>().GetComponent<Collider>(), true);
+                
+                if (gameObject.GetComponent<AnvilEnemy>())
+                {
+                    _target = collider.transform;
+                    Target = _target;
+                }
+                else if (gameObject.GetComponent<TiefEnemy>())
+                {
+                    HideBehindObstacle();
+                }
+                //_isPatroling = false;
+
+                break;
+            }
+            else _isPatroling = true;
+            //if(collider.GetComponent<AnvilEnemy>() )
+            //{
+            //    Physics.IgnoreCollision(collider, GetComponent<Collider>(), true);
+            //}
+            
+        }
+    }
 
     protected virtual void OnCollisionEnter(Collision collision)
     {

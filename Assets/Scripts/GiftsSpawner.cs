@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GiftsSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> gifts = new();
-    [SerializeField] private int _maxGiftsCount = 100;
+    //[SerializeField] private int _maxGiftsCount = 100;
 
     public static GiftsSpawner Instance;
 

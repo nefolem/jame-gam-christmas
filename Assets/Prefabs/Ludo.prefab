@@ -166,7 +166,7 @@ Transform:
   - {fileID: 439908169517895980}
   - {fileID: 761128792007644053}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3136295605583435547
 BoxCollider:
@@ -204,7 +204,7 @@ MonoBehaviour:
   _maxHealth: 2
   _hideRadius: 5
   _isPatroling: 1
-  _findRadius: 100
+  _findRadius: 50
   _anvilObject: {fileID: 2023339821838107544}
   _anvilPoint: {fileID: 439908169517895980}
 --- !u!114 &7482236137160196645
@@ -220,6 +220,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -282,7 +287,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6470357823029104312}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 2
+  m_Radius: 1.86
   m_Speed: 20
   m_Acceleration: 30
   avoidancePriority: 50
@@ -775,6 +780,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anvil
       objectReference: {fileID: 0}
+    - target: {fileID: 2365467911889461511, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034140005538210428, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4923553482991559350, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
       propertyPath: m_Mass
       value: 90
@@ -782,6 +795,10 @@ PrefabInstance:
     - target: {fileID: 4923553482991559350, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
       propertyPath: m_UseGravity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923553482991559350, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5464711637113065922, guid: ecf066de91c9e0747b70889aed87052a, type: 3}
       propertyPath: m_RootOrder

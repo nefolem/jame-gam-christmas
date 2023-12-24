@@ -7,8 +7,15 @@ public class GameIntroManager : MonoBehaviour
 {
     [SerializeField] private float segmentEndTime = 14.82f;
     [SerializeField] private CinemachineVirtualCamera _introVC;
+    [SerializeField] private CinemachineVirtualCamera _gameVC;
     [SerializeField] private List<Transform> _introVCPoints = new List<Transform>();
-    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _playerObject;
+    [SerializeField] private GameObject _introPlayerObject;
+    [SerializeField] private GameObject _sceneEnemiesObject;
+    [SerializeField] private GameObject _introEnemiesObject;
+    [SerializeField] private GameObject _giftsObject;
+
+
     private int _currentIndex = 0;
     public PlayableDirector timelineDirector;
 
@@ -51,7 +58,7 @@ public class GameIntroManager : MonoBehaviour
 
         if (_currentIndex == 1)
         {
-            _introVC.LookAt = _player.transform;
+            _introVC.LookAt = _introPlayerObject.transform;
         }
     }
 
@@ -63,6 +70,18 @@ public class GameIntroManager : MonoBehaviour
     public void SetLookAtNull()
     {
         _introVC.LookAt = null;
+    }
+
+    public void SwitchToGameMode()
+    {
+        _introEnemiesObject.SetActive(false);
+        _sceneEnemiesObject.SetActive(true);
+        _giftsObject.GetComponent<Collider>().enabled = true;
+        _playerObject.SetActive(true);
+        _introPlayerObject.SetActive(false);
+        _introVC.gameObject.SetActive(false);
+        _gameVC.gameObject.SetActive(true);
+        timelineDirector.gameObject.SetActive(false);
     }
 
     void RepeatTimelineSegment()

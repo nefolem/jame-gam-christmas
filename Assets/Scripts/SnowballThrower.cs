@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SnowballThrower : MonoBehaviour
@@ -6,21 +7,22 @@ public class SnowballThrower : MonoBehaviour
     [SerializeField] protected Transform snowballPoint;
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwAngle = 45f;
-    private Vector3 throwPoint;
+
+    private bool _isThrowable = true;  
+    public float _throwInterval = 0.5f; 
+
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && _isThrowable)
         {
-            ThrowSnowball();
+            StartCoroutine(ThrowSnowball());
         }
     }
 
-    
-
-    void ThrowSnowball()
-    {       
-            
+    IEnumerator ThrowSnowball()
+    {
+        _isThrowable = false;
         GameObject snowball = Instantiate(snowballPrefab, snowballPoint.position, Quaternion.identity);            
         Rigidbody rb = snowball.GetComponent<Rigidbody>();
 
@@ -34,7 +36,9 @@ public class SnowballThrower : MonoBehaviour
 
             rb.velocity = throwVelocity;
         }
-        
+        yield return new WaitForSeconds(_throwInterval);
+
+        _isThrowable = true;
     }
 
     Vector3 CalculateThrowDirection(Transform origin, Vector3 target, float angle)

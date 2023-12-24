@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private int _currentHealth;
     
 
-    void Start()
+    void Awake()
     {
         _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
@@ -43,11 +43,13 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovementInput()
     {
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontal, 0f, vertical).normalized;
         _rigidbody.velocity = new Vector3(movement.x * _moveSpeed, _rigidbody.velocity.y, movement.z * _moveSpeed);
+
         if (horizontal != 0f || vertical != 0f)
         {
             WaitForStep();
@@ -59,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+    
 
     private void WaitForStep()
     {
@@ -74,10 +77,10 @@ public class PlayerMovement : MonoBehaviour
     void HandleJumpInput()
     {
         _isGrounded = CheckIfGrounded();
-        
-
-        if (_isGrounded && Input.GetButtonDown("Jump"))
+        if (_isGrounded && Input.GetButton("Jump"))
         {
+            Debug.Log(_isGrounded);
+
             Jump();
         }
     }
@@ -91,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
+
+
 
     void RotateTowardsCursor()
     {
@@ -106,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
             
             float angle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;            
             Quaternion targetRotation = Quaternion.Euler(0f, angle, 0f);
-
+            //Debug.Log(targetDirection);
             float step = _rotationSpeed * Time.fixedDeltaTime;
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, step);
         }

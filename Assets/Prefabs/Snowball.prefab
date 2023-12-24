@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7990945363848390265}
   - component: {fileID: 6970181549924834994}
   - component: {fileID: 8280335092085942500}
-  - component: {fileID: -1224755465639944455}
+  - component: {fileID: 8676344729535828025}
   m_Layer: 0
   m_Name: Snowball
   m_TagString: Snowball
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4063179829065991601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.957054, y: -45.56648, z: -21.283699}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 5.5, y: 5.5, z: 5.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4625928863742855905}
@@ -97,28 +97,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _snowballHit: {fileID: 8142776624367745201, guid: c7b5ca725dc977041bca2c731ecde563, type: 3}
-  _as: {fileID: -1224755465639944455}
---- !u!82 &-1224755465639944455
+  _attractionForce: 500
+  _attractionRadius: 10
+--- !u!82 &8676344729535828025
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4063179829065991601}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 23eec9c94cd24a54087125f67f12f5a5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.84
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 80
+  MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -154,7 +155,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.885
+      value: 0.845
       inSlope: 0
       outSlope: 0
       tangentMode: 0

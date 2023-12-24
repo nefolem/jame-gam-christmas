@@ -7,10 +7,10 @@ public class AnvilEnemy : Enemy
     [SerializeField] private float _findRadius;
     [SerializeField] private GameObject _anvilObject;
     [SerializeField] private Transform _anvilPoint;
-    private Transform _target;
+    //private Transform _target;
     private bool _isAnvilInHands = true;
     private float _timer;
-    private float _delayThrow = 10f;
+    //private float _delayThrow = 10f;
     private GameObject _lastThrown;
 
     private void Start()
@@ -28,7 +28,7 @@ public class AnvilEnemy : Enemy
             if (_isAnvilInHands)
             {
 
-                TryFindPlayer();
+                TryFindPlayer(_findRadius);
             }
             else
             {
@@ -38,13 +38,16 @@ public class AnvilEnemy : Enemy
         }
         else
         {
-            if (transform.position.x != _target.transform.position.x)
+            Vector3 throwPosition = new Vector3(_target.transform.position.x - transform.forward.x * 3, transform.position.y, _target.transform.position.z);
+            //print($"throw pos: {throwPosition} trans pos: {transform.position}");
+            if (transform.position != throwPosition)
             {
                
                 MoveToTarget(_target);
             }
             else
             {
+                //Debug.Log("else");
                 if (_isAnvilInHands)
                 {
 
@@ -58,28 +61,15 @@ public class AnvilEnemy : Enemy
         }
     }
  
-    private void TryFindPlayer()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _findRadius);
-        foreach (Collider collider in colliders)
-        {
-            if (collider.GetComponent<PlayerMovement>())
-            {
-                _target = collider.transform;
-                _isPatroling = false;
-                Debug.Log(_target.gameObject.name);
-                //MoveToTarget(_target);
-                //_targetObject = collider.gameObject;
-                break;
-            }
-        }
-    }
+  
 
     private void ThrowAnvil()
     {
         _anvilObject.GetComponent<Rigidbody>().useGravity = true;
+        _anvilObject.GetComponent<Rigidbody>().isKinematic = false;
         _lastThrown = _anvilObject;
         _anvilObject.transform.SetParent(null);
+        _anvilObject.transform.position = transform.position - Vector3.down * 15;
         _isAnvilInHands = false;
         _target = null;
         _playFX.PlayMeanness();       
@@ -96,7 +86,6 @@ public class AnvilEnemy : Enemy
             {
 
                 _target = collider.gameObject.transform;
-                Debug.Log(_target.gameObject.name);
                 break;
             }
             
@@ -109,6 +98,7 @@ public class AnvilEnemy : Enemy
         _anvilObject.transform.SetParent(_anvilPoint);
         _anvilObject.transform.position = _anvilPoint.transform.position;
         _anvilObject.GetComponent<Rigidbody>().useGravity = false;
+        _anvilObject.GetComponent<Rigidbody>().isKinematic = true;
         _target = null;
         _isAnvilInHands = true;
     }

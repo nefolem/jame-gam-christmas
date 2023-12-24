@@ -24,17 +24,23 @@ public class TiefEnemy : Enemy
     {              
         if(!_isGiftStolen)
         {
-            TryStealGift();            
+            TryStealGift();
             MoveToTarget(_targetObject?.transform);
         }
         else
         {            
-            _targetObject.transform.position = _stolenGiftPoint.transform.position;
-            if(_hideSpot == null)
+            if(_targetObject != null)
             {
-                HideBehindObstacle();
+                _targetObject.transform.position = _stolenGiftPoint.transform.position;
+                TryFindPlayer(_findToStealRadius);
             }
-            MoveToTarget(_hideSpot);
+            else _isGiftStolen=false;
+            
+            //if(_hideSpot == null)
+            //{
+            //    HideBehindObstacle();
+            //}
+            //MoveToTarget(_hideSpot);
         }     
     }
 
@@ -44,10 +50,10 @@ public class TiefEnemy : Enemy
         {
             FindAndSetTargetGift();            
         }
-        else if (!_isTargetBox && Vector3.Distance(transform.position, _targetObject.transform.position) <= _stealRadius)
+        else if (_targetObject != null && !_isTargetBox && Vector3.Distance(transform.position, _targetObject.transform.position) <= _stealRadius)
         {
             StealGift();
-            HideBehindObstacle();
+            //HideBehindObstacle();
         }
     }
 
@@ -57,8 +63,7 @@ public class TiefEnemy : Enemy
         foreach (Collider collider in colliders)
         {            
             if (collider.CompareTag(_giftTag) && collider.gameObject != _lastStolen)
-            {                
-                
+            {                                
                 _targetObject = collider.gameObject;
                 _isTargetBox = false;
                 break;
@@ -73,7 +78,9 @@ public class TiefEnemy : Enemy
 
     private void StealGift()
     {
+     
         _targetObject.GetComponent<Rigidbody>().useGravity = false;
+        _targetObject.GetComponent<GiftPickUp>().enabled = false;
         _playFX.PlayMeanness();
         _isGiftStolen = true;
     }    
@@ -87,6 +94,7 @@ public class TiefEnemy : Enemy
             if (_isGiftStolen)
             {
                 _targetObject.GetComponent<Rigidbody>().useGravity = true;
+                _targetObject.GetComponent<GiftPickUp>().enabled = true;
                 _lastStolen = _targetObject;
                 _targetObject = null;
                 _isGiftStolen = false;
