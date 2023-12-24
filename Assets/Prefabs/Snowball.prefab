@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6970181549924834994}
   - component: {fileID: 8280335092085942500}
   - component: {fileID: 8676344729535828025}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Snowball
   m_TagString: Snowball
   m_Icon: {fileID: 0}
@@ -252,8 +252,16 @@ PrefabInstance:
       value: jamegam-13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 78359ac4b195ba14baec0c9f569594b4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 78359ac4b195ba14baec0c9f569594b4, type: 3}
       propertyPath: m_TagString
       value: Snowball
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 78359ac4b195ba14baec0c9f569594b4, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 78359ac4b195ba14baec0c9f569594b4, type: 3}
       propertyPath: m_TagString

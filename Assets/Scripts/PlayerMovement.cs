@@ -43,12 +43,14 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovementInput()
     {
-
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontal, 0f, vertical).normalized;
-        _rigidbody.velocity = new Vector3(movement.x * _moveSpeed, _rigidbody.velocity.y, movement.z * _moveSpeed);
+        Vector3 moveVelocity = movement * _moveSpeed;
+
+        
+        _rigidbody.AddForce(moveVelocity, ForceMode.VelocityChange);
 
         if (horizontal != 0f || vertical != 0f)
         {
@@ -59,9 +61,9 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("IsMoving", false);
         }
-
     }
-    
+
+
 
     private void WaitForStep()
     {
@@ -95,8 +97,6 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
-
-
     void RotateTowardsCursor()
     {
         Vector3 targetDirection = CursorPosition.GetMouseTargetDirection(transform);
@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         if(_currentHealth <= 0) 
         {
             _playFX.PlayDeathEffect(transform.position);
-            Destroy(gameObject, 0.3f);
+            Destroy(gameObject);
         }
     }
 }

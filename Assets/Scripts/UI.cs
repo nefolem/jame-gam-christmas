@@ -29,7 +29,15 @@ public class UI : MonoBehaviour
     {
         foreach (var text in _giftCountText) 
         {
-            text.text = $"Quota: \r\n{giftsCount.ToString("d3")} / 100";
+            if(giftsCount < 100)
+            {
+            text.text = $"Quota: \r\n<color=#ff0000ff>{giftsCount.ToString("d3")}</color> / 100";
+
+            }
+            else
+            {
+                text.text = $"Quota: \r\n<color=#00ff00ff>{giftsCount.ToString("d3")}</color> / 100";
+            }
         }
         
     }

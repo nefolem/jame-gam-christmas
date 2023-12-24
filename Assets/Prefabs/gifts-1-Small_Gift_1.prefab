@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 984589302900395919}
   - component: {fileID: 419268602010035108}
   - component: {fileID: 191532528870282430}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: gifts-1-Small_Gift_1
   m_TagString: Gift
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1e81a0b710d004f9e9f5a74efb0072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 0}
+  _giftPickUpEffect: {fileID: 8142776624367745201, guid: b7c582cf87325d04aab4588e52a4916b, type: 3}
 --- !u!1 &5207606425207312700
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 293071216577729000}
   - component: {fileID: 7364150131535202611}
   - component: {fileID: 4470194921390581263}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: default
   m_TagString: Gift
   m_Icon: {fileID: 0}

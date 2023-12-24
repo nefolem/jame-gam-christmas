@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class TreeShelter : MonoBehaviour
 {
     private List<GameObject> enemyList = new();
+    [SerializeField] private Transform _spawnPosition;
 
     //private void OnTriggerEnter(Collider other)
     //{
@@ -30,15 +31,19 @@ public class TreeShelter : MonoBehaviour
         }
         else if (collision.gameObject.GetComponent<Snowball>())
         {
-            //print("snowball");
-            foreach (GameObject go in enemyList)
+            if(enemyList.Count > 0)
             {
-                go.SetActive(true);
-                Vector3 localPosition = transform.localPosition;
-                Vector3 globalPosition = transform.parent.TransformPoint(localPosition);
-                go.transform.position = globalPosition + transform.forward * 8;
-                //print(go.transform.position);  
+                //print("snowball");
+                foreach (GameObject go in enemyList)
+                {
+                    go.SetActive(true);
+                    
+                    go.transform.position = _spawnPosition.position;
+                    
+                    //print(go.transform.position);  
+                }
             }
+            
         }
     }
 }

@@ -9,19 +9,28 @@ public class SnowballThrower : MonoBehaviour
     [SerializeField] private float throwAngle = 45f;
 
     private bool _isThrowable = true;  
-    public float _throwInterval = 0.5f; 
+    public float _throwInterval = 0.5f;
+
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && _isThrowable)
         {
+            //_animator.SetTrigger("Throw");
             StartCoroutine(ThrowSnowball());
         }
     }
 
     IEnumerator ThrowSnowball()
     {
+        
         _isThrowable = false;
         GameObject snowball = Instantiate(snowballPrefab, snowballPoint.position, Quaternion.identity);            
         Rigidbody rb = snowball.GetComponent<Rigidbody>();

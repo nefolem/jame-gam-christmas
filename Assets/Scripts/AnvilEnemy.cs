@@ -38,7 +38,7 @@ public class AnvilEnemy : Enemy
         }
         else
         {
-            Vector3 throwPosition = new Vector3(_target.transform.position.x - transform.forward.x * 3, transform.position.y, _target.transform.position.z);
+            Vector3 throwPosition = new Vector3(_target.transform.position.x - transform.forward.x * 10, transform.position.y, _target.transform.position.z);
             //print($"throw pos: {throwPosition} trans pos: {transform.position}");
             if (transform.position != throwPosition)
             {
@@ -69,7 +69,7 @@ public class AnvilEnemy : Enemy
         _anvilObject.GetComponent<Rigidbody>().isKinematic = false;
         _lastThrown = _anvilObject;
         _anvilObject.transform.SetParent(null);
-        _anvilObject.transform.position = transform.position - Vector3.down * 15;
+        _anvilObject.transform.position = transform.position + Vector3.down * 10;
         _isAnvilInHands = false;
         _target = null;
         _playFX.PlayMeanness();       

@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b57de68e74d42478064dea5f96062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 5
+  _maxHealth: 3
   _hideRadius: 60
   _isPatroling: 1
   _giftTag: Gift

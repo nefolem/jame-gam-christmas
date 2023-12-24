@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 public class GameIntroManager : MonoBehaviour
 {
     [SerializeField] private float segmentEndTime = 14.82f;
+    [SerializeField] private float skipTime = 70.6f;
     [SerializeField] private CinemachineVirtualCamera _introVC;
     [SerializeField] private CinemachineVirtualCamera _gameVC;
     [SerializeField] private List<Transform> _introVCPoints = new List<Transform>();
@@ -14,6 +15,7 @@ public class GameIntroManager : MonoBehaviour
     [SerializeField] private GameObject _sceneEnemiesObject;
     [SerializeField] private GameObject _introEnemiesObject;
     [SerializeField] private GameObject _giftsObject;
+    [SerializeField] private GameObject _watch;
 
 
     private int _currentIndex = 0;
@@ -62,6 +64,12 @@ public class GameIntroManager : MonoBehaviour
         }
     }
 
+    public void SkipIntro()
+    {
+        timelineDirector.time = skipTime;
+        timelineDirector.Play();
+    }
+
     public void AddToGiftsCount()
     {
         GiftsSpawner.Instance.AddToGiftsCount();
@@ -81,7 +89,8 @@ public class GameIntroManager : MonoBehaviour
         _introPlayerObject.SetActive(false);
         _introVC.gameObject.SetActive(false);
         _gameVC.gameObject.SetActive(true);
-        timelineDirector.gameObject.SetActive(false);
+        //timelineDirector.gameObject.SetActive(false);
+        _watch.SetActive(true);
     }
 
     void RepeatTimelineSegment()

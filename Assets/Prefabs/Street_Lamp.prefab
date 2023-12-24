@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5533903555088493723}
   - component: {fileID: 4736121287181146497}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 694180498669048302}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Street_Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3320250752509802918}
   - component: {fileID: 7826373945780786960}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 4716687770445038510}
   - component: {fileID: 3367542030811383908}
   - component: {fileID: 2087670067769020464}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4021359873061021510}
   - component: {fileID: 5164506240684174913}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
